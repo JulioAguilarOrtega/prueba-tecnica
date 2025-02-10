@@ -9,8 +9,8 @@ import * as Highcharts from 'highcharts';
   styleUrl: './information-chart.component.scss'
 })
 export class InformationChartComponent {
-  protected title = input<string>();
-  protected dataChart = input<any>();
+  public title = input<string>();
+  public dataChart = input<any>();
   public Highcharts = Highcharts;
   protected chartOptions: any = {};
 
