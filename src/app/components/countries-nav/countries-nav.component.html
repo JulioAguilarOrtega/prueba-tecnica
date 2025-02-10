@@ -1,0 +1,16 @@
+<nav class="navigation">
+    @defer (when globalStore.continents().length) {
+    <ul class="navigation-list">
+        @for (continent of countriesList(); track $index) {
+        <li class="navigation-list-item">
+            <a [routerLink]="['/continent-detail', continent.name]" (click)="sendNameParams(continent.name)"
+                routerLinkActive="active">
+                {{ continent.name }}
+            </a>
+        </li>
+        }
+    </ul>
+    } @placeholder {
+    Loading ...
+    }
+</nav>

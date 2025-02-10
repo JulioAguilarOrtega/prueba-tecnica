@@ -1,0 +1,10 @@
+<aside class="container">
+    @defer (when globalStore.worldPopulation()) {
+    <h1>There are {{ globalStore.worldPopulation() }} persons in the world! </h1>
+    <app-information-chart [dataChart]="globalStore.continents()" [title]="'World'" />
+    } @placeholder {
+    <div class="no-results">
+        Loading...
+    </div>
+    }
+</aside>

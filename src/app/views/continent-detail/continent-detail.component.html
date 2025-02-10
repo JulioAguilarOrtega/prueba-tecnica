@@ -1,0 +1,22 @@
+<div class="continent-container">
+
+    <button (click)="backToMainlyView()">< Back to continents list</button>
+    <aside>
+        @if(countriesList().length) {
+            <app-information-chart [title]="continentName()" [dataChart]="countriesList()" />
+        } @else {
+            <div class="no-results">
+                There are not data.
+            </div>
+        }
+    </aside>
+    <aside>
+        <div class="divisor-filters">
+            <input type="text" class="general-custom-input" [(ngModel)]="countryName" name="country"
+                placeholder="Search country" />
+            <input type="text" placeholder="Population amount" class="general-custom-input" [(ngModel)]="amount"
+                (keydown)="onKeyDown($event)" (keyup)="onKeyUp()" name="amount" id="amount">
+        </div>
+        <app-information-table [tableElement]="getCountriesFiltered(countryName())" />
+    </aside>
+</div>
