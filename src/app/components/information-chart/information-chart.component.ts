@@ -1,7 +1,6 @@
-import { Component, input, Input, signal, SimpleChanges } from '@angular/core';
+import { Component, input, SimpleChanges } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import * as Highcharts from 'highcharts';
-import { Countries } from '../../models/countries.model';
 
 @Component({
   selector: 'app-information-chart',
@@ -10,11 +9,15 @@ import { Countries } from '../../models/countries.model';
   styleUrl: './information-chart.component.scss'
 })
 export class InformationChartComponent {
-  title = input<string>();
-  dataChart = input<any>();
+  protected title = input<string>();
+  protected dataChart = input<any>();
   public Highcharts = Highcharts;
-  chartOptions: any = {};
+  protected chartOptions: any = {};
 
+  /**
+   * listen changes on dataChart input to update data in highchart 
+   * @param changes
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['dataChart']) {
       this.chartOptions = {

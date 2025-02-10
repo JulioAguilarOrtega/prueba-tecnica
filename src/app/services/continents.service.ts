@@ -13,7 +13,7 @@ export class ContinentsService {
   private http = inject(HttpClient);
 
   /**
-   * service gets all countries group by continents
+   * service gets all countries group by Continents
    * @returns An Observable: Continents[]
    */
   getAllContinents(): Observable<Continents[]> {

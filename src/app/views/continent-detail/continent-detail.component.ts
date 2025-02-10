@@ -46,16 +46,29 @@ export class ContinentDetailComponent {
     this.shareService.setData({ currentRoute: this.countryName(), amount: this.amount() || 1000000000 });
   }
 
+  /**
+   * return a filtered object continent list
+   * @param value: string
+   * @returns countries array
+   */
   getCountriesFiltered = (value: string = this.countryName()): Countries[] => {
     const countries = this.countriesList();
     return countries.filter((country: Countries) => country.name.common.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
   }
 
+  /**
+   * method to back continents mainly view and restore data in shareServices
+   */
   backToMainlyView = () => {
     this.shareService.setData({ currentRoute: '', amount: 1000000000 });
     this.navigateUrl.navigate(['/continents']);
   };
 
+  /**
+   * get array countries per continent
+   * @param amount: number
+   * @returns: countries array
+   */
   private updateCountriesList = (amount: number): Countries[] => {
     const continent = this.globalStore.getAllContinentsByAmount(amount).find(continent => continent.name === this.continentName());
     return continent ? continent.countries : [];
