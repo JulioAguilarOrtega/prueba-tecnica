@@ -1,11 +1,11 @@
 .navigation {
     margin: 5% 0 0;
-
+    position: relative;
     &-list {
         list-style: none;
         padding: 0;
         margin: 0;
-
+        height: 450px;
         &-item {
             padding: 0 0 0 20px;
             border-bottom: 1px solid #D4DBE2;
@@ -33,16 +33,9 @@
             }
         }
     }
-    &-range {
-        margin: 30px 0 0;
-        padding: 0 0 0 10px;
-        span {
-            display: block;
-            padding: 0 0 10px 5px;
-            text-align: start;
-        }
-        &-input{
-            width: 100%;
-        }
+
+    input {
+        margin: 0 0 0 17px;
     }
+
 }

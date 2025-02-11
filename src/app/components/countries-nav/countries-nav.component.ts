@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { GlobalStore } from '../../stores/global.store';
 import { ShareService } from '../../services/share.service';
 import { FormsModule } from '@angular/forms';
@@ -15,17 +15,21 @@ export class CountriesNavComponent {
   // inject services
   readonly globalStore = inject(GlobalStore); // get signal store from globalStore
   shareService = inject(ShareService); // inject service ShareService
+  private route = inject(ActivatedRoute);
 
   //initialize signals
-  countriesList = signal<Continents[]>(this.globalStore.continents()); 
+  countriesList = signal<Continents[]>(this.globalStore.continents());
   amount = signal<number | undefined>(undefined);
   name = signal<string>('');
 
   constructor() {
     effect(() => {
-      this.amount.set(this.shareService.getData().amount);
       this.name.set(this.shareService.getData().currentRoute);
-      this.countriesList.set(this.globalStore.getAllContinentsByAmount(this.amount()).filter(continent => continent.countries.length > 0));
+      if(this.amount()) {
+        this.countriesList.set(this.globalStore.getAllContinentsByAmount(this.amount()).filter(continent => continent.countries.length > 0));
+      }else {
+        this.countriesList.set(this.globalStore.continents());
+      }
     });
   }
 
@@ -38,4 +42,19 @@ export class CountriesNavComponent {
     this.shareService.setData({ currentRoute: name, amount: this.amount() });
   }
 
+
+  /**
+     * method that prevent data entry diffent than numbers
+     * @param event
+     */
+  onKeyDown = (event: KeyboardEvent): void => {
+    const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'];
+    if (!/[0-9]/.test(event.key) && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  onKeyUp = (): void => {
+    this.shareService.setData({ currentRoute: '', amount: this.amount() });
+  }
 }

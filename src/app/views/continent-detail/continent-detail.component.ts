@@ -27,23 +27,8 @@ export class ContinentDetailComponent {
   constructor() {
     effect(() => {
       this.continentName.set(this.shareService.getData().currentRoute || this.route.snapshot.paramMap.get('continent') || '');
-      this.countriesList.set(this.updateCountriesList(this.amount() || 1000000000));
+      this.countriesList.set(this.updateCountriesList(this.shareService.getData().amount || 1000000000));
     });
-  }
-
-  /**
-   * method that prevent data entry diffent than numbers
-   * @param event
-   */
-  onKeyDown = (event: KeyboardEvent): void => {
-    const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'];
-    if (!/[0-9]/.test(event.key) && !allowedKeys.includes(event.key)) {
-      event.preventDefault();
-    }
-  }
-
-  onKeyUp = (): void => {
-    this.shareService.setData({ currentRoute: this.countryName(), amount: this.amount() || 1000000000 });
   }
 
   /**

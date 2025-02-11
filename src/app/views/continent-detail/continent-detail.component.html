@@ -14,8 +14,6 @@
         <div class="divisor-filters">
             <input type="text" class="general-custom-input" [(ngModel)]="countryName" name="country"
                 placeholder="Search country" />
-            <input type="text" placeholder="Population amount" class="general-custom-input" [(ngModel)]="amount"
-                (keydown)="onKeyDown($event)" (keyup)="onKeyUp()" name="amount" id="amount">
         </div>
         <app-information-table [tableElement]="getCountriesFiltered(countryName())" />
     </aside>

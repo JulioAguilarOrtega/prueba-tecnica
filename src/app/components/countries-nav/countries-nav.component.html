@@ -10,6 +10,8 @@
         </li>
         }
     </ul>
+    <input type="text" placeholder="Population amount" class="general-custom-input" [(ngModel)]="amount"
+        (keydown)="onKeyDown($event)" (keyup)="onKeyUp()" name="amount" id="amount">
     } @placeholder {
     Loading ...
     }
